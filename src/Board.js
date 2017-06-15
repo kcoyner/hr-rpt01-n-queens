@@ -145,19 +145,31 @@
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
       var boardSize = this.get('n');
-      var counter = 0;
+
       for (var i = 0; i < boardSize; i++) {
         if(this.get(i)[majorDiagonalColumnIndexAtFirstRow] === 1){
-          counter += this.get(i)[majorDiagonalColumnIndexAtFirstRow];
-          if (counter > 1) {
+          if(nextFunction(i, this.get(i), this.get(i)[majorDiagonalColumnIndexAtFirstRow], majorDiagonalColumnIndexAtFirstRow)){
             return true;
-          }
-          if (majorDiagonalColumnIndexAtFirstRow === boardSize) {
-            return false;
           }
         }
       }
-      // return false;
+
+      function nextFunction(rowIndex, rowArray, square, colIndex) {
+        var counter = square;
+        var row = rowIndex + 1;
+        var col = colIndex + 1;
+        for(var j = row; j <= boardSize; j++ ){
+          counter += rowArray[col];
+          col++;
+             console.log('counter: ', counter);
+          if(counter > 1) {
+            return true;
+          }
+        }
+        return false;
+      }
+
+      return false;
     },
 
     // test if any major diagonals on this board contain conflicts
