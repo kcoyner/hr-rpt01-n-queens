@@ -19,7 +19,12 @@ window.findNRooksSolution = function(n) {
   var solution = undefined; //fixme
 
   //  create a board and set solution = []
+  var board = new Board({ n:n });
   //  methodically insert a rook in first array first position
+  for (var i = 0; i < n ; i++) {
+    // board.set(0)[0] = 1;
+    console.log(board.get(0)[0]);
+  }
     // methodically insert a 2nd rook on next row first position
     // use helper methods to see if they conflict in any way
     // if no conflict...
@@ -30,7 +35,6 @@ window.findNRooksSolution = function(n) {
     // if solution array length is n, return solution
   // advance this loop by moving rook over one col on first row
 
-  var board = new Board({ n:n });
   // console.log('board: ', board);
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
   return solution;
