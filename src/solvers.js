@@ -55,9 +55,14 @@ window.findNQueensSolution = function(n) {
   var board = new Board({ n: n });
   var startRow = 0;
 
-  if(n === 2 ){
-    return solution;
-  }
+  /* When n = 4, it calcs 2 for solution. But the real answer is 4. Our
+   * solution begins on 0,0, but the correct answer begins on 0,1. So we need
+   * a test such that if solution < n, then we advance to 0,1 to start the
+   * cycle again.  If that doesn't produce solution === n, then advance across
+   * the row again. We have to do this for the other exercises anyway. Also, I
+   * would think that you don't have to iterate across the whole array but
+   * just to the half way point, then double.
+   */
 
   var checkerFunction = function(board, row) {
     for (var c = 0; c < n; c++) {
@@ -67,7 +72,7 @@ window.findNQueensSolution = function(n) {
       board.togglePiece(row, c);
       if (!board.hasAnyQueensConflicts()) {
         solution = board.rows();
-        checkerFunction(board, row + 1)
+        checkerFunction(board, row + 1);
       } else {
         board.togglePiece(row, c);
       }
