@@ -8,7 +8,7 @@
 
   window.Board = Backbone.Model.extend({
 
-    initialize: function (params) {
+    initialize: function(params) {
       if (_.isUndefined(params) || _.isNull(params)) {
         console.log('Good guess! But to use the Board() constructor, you must pass it an argument in one of the following formats:');
         console.log('\t1. An object. To create an empty board of size n:\n\t\t{n: %c<num>%c} - Where %c<num> %cis the dimension of the (empty) board you wish to instantiate\n\t\t%cEXAMPLE: var board = new Board({n:5})', 'color: blue;', 'color: black;', 'color: blue;', 'color: black;', 'color: grey;');
@@ -27,7 +27,7 @@
     },
 
     togglePiece: function(rowIndex, colIndex) {
-      this.get(rowIndex)[colIndex] = + !this.get(rowIndex)[colIndex];
+      this.get(rowIndex)[colIndex] = +!this.get(rowIndex)[colIndex];
       this.trigger('change');
     },
 
@@ -65,14 +65,14 @@
 
 
 
-/*
-         _             _     _
-     ___| |_ __ _ _ __| |_  | |__   ___ _ __ ___ _
-    / __| __/ _` | '__| __| | '_ \ / _ \ '__/ _ (_)
-    \__ \ || (_| | |  | |_  | | | |  __/ | |  __/_
-    |___/\__\__,_|_|   \__| |_| |_|\___|_|  \___(_)
+    /*
+             _             _     _
+         ___| |_ __ _ _ __| |_  | |__   ___ _ __ ___ _
+        / __| __/ _` | '__| __| | '_ \ / _ \ '__/ _ (_)
+        \__ \ || (_| | |  | |_  | | | |  __/ | |  __/_
+        |___/\__\__,_|_|   \__| |_| |_|\___|_|  \___(_)
 
- */
+     */
     /*=========================================================================
     =                 TODO: fill in these Helper Functions                    =
     =========================================================================*/
@@ -115,8 +115,9 @@
     hasColConflictAt: function(colIndex) {
       var boardSize = this.get('n');
       var counter = 0;
+
       for (var i = 0; i < boardSize; i++) { //[0,1,0,0]
-        counter += this.get(i)[colIndex];
+        counter += this.get(i)[colIndex]
       }
       if (counter > 1) {
         return true;
@@ -147,10 +148,10 @@
       for (var i = 0; i < boardSize; i++) {
         if (this.get(i)[majorDiagonalColumnIndexAtFirstRow] === 1) {
           var counter = 0;
-          for (let j = 0; (i + j) < boardSize; j++) {
+          for (let j = 0;(i + j) < boardSize; j++) {
             counter += this.get(i + j)[majorDiagonalColumnIndexAtFirstRow + j];
             if (counter > 1) {
-              return true;
+            return true;
             }
           }
         }
@@ -180,10 +181,10 @@
       for (var i = 0; i < boardSize; i++) {
         if (this.get(i)[minorDiagonalColumnIndexAtFirstRow] === 1) {
           var counter = 0;
-          for (let j = 0; (i + j) < boardSize; j++) {
+          for (let j = 0;(i + j) < boardSize; j++) {
             counter += this.get(i + j)[minorDiagonalColumnIndexAtFirstRow - j];
             if (counter > 1) {
-              return true;
+            return true;
             }
           }
         }
